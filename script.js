@@ -22,8 +22,8 @@ const gameConfig = {
 };
 
 const berryTypes = [
-  { emoji: "🍓", value: 1, type: "good" },
-  { emoji: "🍇", value: 2, type: "good" },
+  { emoji: "🍓", value: 3, type: "good" },
+  { emoji: "🍇", value: -1, type: "good" },
   { emoji: "🫐", value: -2, type: "bad" },
 ];
 
@@ -90,7 +90,7 @@ function moveBerries() {
 
     const bLeft = parseInt(berryObj.el.style.left);
     if (
-      berryObj.top >= 670 &&
+      berryObj.top >= 640 &&
       bLeft + 30 >= gameState.basketLeft &&
       bLeft <= gameState.basketLeft + 120
     ) {
@@ -98,7 +98,6 @@ function moveBerries() {
       berryObj.el.remove();
       gameState.berries.splice(index, 1);
     }
-
     if (berryObj.top > 700) {
       berryObj.el.remove();
       gameState.berries.splice(index, 1);
@@ -115,12 +114,32 @@ function handleCatch(berryObj) {
   if (type === "good") {
     catchSound.play();
     gameState.score += value;
+    berryObj.el.classList.add("berry-good-caught");
   } else if (type === "bad") {
     missSound.play();
-    gameState.score = Math.max(0, gameState.score + value);
+    gameState.score += value; // allow negative
+    berryObj.el.classList.add("berry-bad-caught");
   }
 
   scoreDisplay.textContent = "Score: " + gameState.score;
+
+  // Show floating points near the berry
+  showFloatingPoints(value, berryObj.el);
+
+  // Game over if score is below 0
+  if (gameState.score < 0) {
+    endGame();
+    startScreen.style.display = "flex";
+  }
+
+  // Remove berry after animation
+  berryObj.el.addEventListener(
+    "animationend",
+    () => {
+      berryObj.el.remove();
+    },
+    { once: true }
+  );
 }
 
 function updateTimer() {
@@ -187,3 +206,27 @@ window.onload = () => {
   const high = localStorage.getItem(gameConfig.highScoreKey) || 0;
   highScoreDisplay.textContent = `High Score: ${high}`;
 };
+
+function showFloatingPoints(value, berryElement) {
+  const pointsEl = document.createElement("div");
+  pointsEl.className = "floating-points";
+  pointsEl.textContent = (value > 0 ? "+" : "") + value;
+
+  // Position the points where the berry is
+  const berryRect = berryElement.getBoundingClientRect();
+  const gameRect = document.getElementById("game").getBoundingClientRect();
+
+  pointsEl.style.left = berryRect.left - gameRect.left + "px";
+  pointsEl.style.top = berryRect.top - gameRect.top + "px";
+
+  document.getElementById("game").appendChild(pointsEl);
+
+  // Remove after animation
+  pointsEl.addEventListener(
+    "animationend",
+    () => {
+      pointsEl.remove();
+    },
+    { once: true }
+  );
+}
