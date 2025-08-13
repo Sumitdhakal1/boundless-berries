@@ -18,7 +18,7 @@ const gameConfig = {
   highScoreKey: "berryCatcherHighScore",
   goldenBerryChance: 0.1,
   rottenBerryChance: 0.1,
-  blueBerryChance: 0.05,
+  blueBerryChance: 0.02,
 };
 
 let gameState = {
@@ -167,7 +167,7 @@ function catchBerry(berryObj) {
   } else if (berryObj.type === "rotten") {
     addScore(-10, berryObj.el);
   } else if (berryObj.type === "blue") {
-    addTime(5, berryObj.el);
+    addTime(2, berryObj.el);
   } else {
     addScore(1, berryObj.el);
   }
