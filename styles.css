@@ -11,7 +11,7 @@ body {
   min-height: 100vh;
 }
 
-#game {
+/* #game {
   width: min(90vw, 500px);
   height: min(120vw, 600px);
   background: #fff8f0;
@@ -20,6 +20,19 @@ body {
   position: relative;
   overflow: hidden;
   user-select: none;
+  background: url("gamebacground.png") no-repeat center / contain;
+} */
+#game {
+  width: min(90vw, 500px);
+  height: min(120vw, 600px);
+  background-color: #fff8f0;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+
+  background: url("gamebacground.png") no-repeat center / cover;
 }
 /* 
 #basket {
@@ -88,6 +101,16 @@ body {
   background: url("blueberry.png") no-repeat center / contain;
 }
 
+.purple-berry {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(0 0 6px purple);
+  transition: opacity 0.3s ease;
+  background: url("purpleberry.png") no-repeat center / contain;
+}
 .info-panel {
   position: fixed;
   top: 20px;
