@@ -2,20 +2,18 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Berry Catcher</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>🍓 Berry Catcher</h1>
     <div id="game">
       <div id="basket"></div>
       <div id="comboDisplay"></div>
-      <div id="livesContainer">❤️❤️❤️</div>
 
       <div id="startScreen" class="game-overlay">
         <h2>Berry Catcher</h2>
-        <p>Catch the 🍓 and 🍇, avoid the 🫐!</p>
+        <p>Catch the 🍓 Made by DhaLochan</p>
         <p id="highScoreDisplay">High Score: 0</p>
         <button id="startButton">Start Game</button>
       </div>
@@ -29,17 +27,8 @@
 
     <div class="info-panel">
       <p id="score">Score: 0</p>
-      <p id="timer">Time: 05:00</p>
+      <p id="timer">Time: 01:00</p>
     </div>
-
-    <div id="controls">
-      <button id="leftBtn">⬅️</button>
-      <button id="rightBtn">➡️</button>
-    </div>
-
-    <audio id="catchSound" src="sounds/catch.mp3"></audio>
-    <audio id="missSound" src="sounds/miss.mp3"></audio>
-    <audio id="powerUpSound" src="sounds/powerup.mp3"></audio>
 
     <script src="script.js"></script>
   </body>
